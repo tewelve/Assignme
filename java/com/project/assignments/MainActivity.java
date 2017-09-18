@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity implements Animation.Animati
 
     ImageView imageView;
     Button btnStart;
-    Animation animFadein, animFadeout;
+    Animation blink;
 
 
     @Override
@@ -23,12 +23,12 @@ public class MainActivity extends AppCompatActivity implements Animation.Animati
         imageView = (ImageView) findViewById(R.id.imageView);
         btnStart = (Button) findViewById(R.id.btnStart);
         // loads the animation
-        animFadeout= AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fadeout);
-        animFadein = AnimationUtils.loadAnimation(getApplicationContext(),
-                R.anim.fade_in);
+        blink= AnimationUtils.loadAnimation(getApplicationContext(), R.anim.blink);
+        //animF = AnimationUtils.loadAnimation(getApplicationContext(),
+            //    R.anim.fade_in);
 
         // set listener
-        animFadein.setAnimationListener(this);
+        blink.setAnimationListener(this);
 
         // button click event
         btnStart.setOnClickListener(new View.OnClickListener() {
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements Animation.Animati
                 imageView.setVisibility(View.VISIBLE);
 
                 // start the animation
-                imageView.startAnimation(animFadein);
+                imageView.startAnimation(blink);
             }
         });
 
@@ -48,9 +48,10 @@ public class MainActivity extends AppCompatActivity implements Animation.Animati
     public void onAnimationEnd(Animation animation) {
 
         // check for fade in animation with image
-        if (animation == animFadein) {
-            imageView.startAnimation(animFadeout);
-            animFadeout.start();
+        if (animation == blink) {
+
+            imageView.startAnimation(blink);
+            blink.start();
         }
 
     }
